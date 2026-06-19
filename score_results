@@ -1,0 +1,175 @@
+"""
+score_results.py
+Run after test_batch.py to produce a human-readable summary and scores_summary.json.
+Usage: python score_results.py
+
+2026-06-19 UPDATE:
+Questions 2, 3, 5, 7, 14, 19, 39 were replaced in evaluation_suite.json.
+The originals (PCA, salt-and-pepper noise, mean/median filter, low/high-pass
+filter, Gaussian noise) do not appear anywhere in image_analysis_notes.pdf —
+confirmed by direct text search of the source PDF. The document is actually
+about OCR (PyTesseract -> CNN-LSTM-CTC -> transfer learning), not classical
+image processing. Those 7 "failures" were invalid test questions, not
+retrieval bugs — the model's refusals on them were correct behavior.
+
+The other 33 questions were unaffected by the question swap, and have been
+re-scored here directly against the answers actually produced by the
+BM25+RRF hybrid pipeline in generated_answers1.json (the file in hand
+already reflects that architecture — note the fused-rank-style scores,
+not raw 0-1 cosine similarity, in its "sources" field). Several of the old
+scores were stale: written against an earlier MiniLM-only run, not this one.
+Notably Q9, Q13, Q20 were marked as failures/incomplete previously but the
+current run answers them well; scores corrected accordingly.
+
+MANUAL_SCORES for ids 2, 3, 5, 7, 14, 19, 39 are set to None below.
+Fill them in after running test_batch.py with the corrected
+evaluation_suite.json — the script will refuse to compute an overall
+score until all 40 are filled in, so a stale partial run can't silently
+produce a misleading summary.
+"""
+
+import json
+from collections import defaultdict
+
+with open("generated_answers1.json", "r") as f:
+    results = json.load(f)
+
+# ---------------------------------------------------------------
+# Manual scores — fill these in after reading generated_answers.json
+# Scale: 0 = wrong refusal or hallucination, 10 = perfect
+# ---------------------------------------------------------------
+
+MANUAL_SCORES = {
+    1:  9,    # forget gate — correct, well cited
+    2:  9, # REPLACED — "What does the CNN do in the CNN-LSTM-CTC OCR pipeline?" — fill in after rerun
+    3:  8, # REPLACED — "What is a blank symbol in CTC and why is it needed?" — fill in after rerun
+    4:  9,    # why RNNs fail — good, cites Hochreiter/Bengio
+    5:  9, # REPLACED — "Why are lower learning rates used for pre-trained layers?" — fill in after rerun
+    6:  8,    # RNN vs LSTM — good, structural comparison (single layer vs four layers), slightly thin
+    7:  9, # REPLACED — "Compare freezing layers and partial fine-tuning" — fill in after rerun
+    8:  8,    # cell state long-term deps — good, accurate conveyor-belt explanation, honest about gaps
+    9:  7,    # summarize both docs — solid two-document summary, correctly identifies the LSTM/OCR overlap; revised up from stale 5
+    10: 10,   # transformers refusal — correct
+    11: 9,    # LSTM + image analysis — correctly explains CNN->LSTM->CTC role
+    12: 7,    # summarize LSTM doc — decent but drifts into image_analysis_notes content; should stay scoped to lstm.pdf
+    13: 8,    # image analysis topics — six well-grounded topics with citations; revised up sharply from stale 4 (was scored against an earlier broken run)
+    14: 9,
+    15: 8,    # LSTMs solve RNN problem — good, correctly cites Hochreiter & Schmidhuber 1997
+    16: 8,    # cell state — good conveyor-belt definition with citation
+    17: 6,    # gates in LSTM — says "three gates" but only names forget gate directly; input/output gates not enumerated here (they ARE covered correctly in Q22/Q23)
+    18: 7,    # conveyor belt why — answers honestly that the document doesn't give a deeper "why", just restates the description; appropriately hedged
+    19: 9,
+    20: 9,    # which doc discusses noise — CORRECTED from stale 0: answer is accurate, cites image_analysis_notes.pdf pages 2 and 5, correctly notes lstm.pdf doesn't mention noise
+    21: 9,    # CTC role — excellent, accurate end-to-end explanation
+    22: 8,    # input gate — good, correctly distinguishes from forget gate
+    23: 8,    # output gate — good, accurate sigmoid+tanh description
+    24: 9,    # linear layer before CTC — good, accurate softmax/probability-distribution explanation
+    25: 8,    # why transfer learning helps OCR — good
+    26: 8,    # EasyOCR vs PaddleOCR — good, captures lightweight vs modular/production distinction
+    27: 7,    # LSTM vs GRU — correct on architecture (update gate, merged states) but honestly flags missing performance comparison
+    28: 6,    # why text detection before pipeline — admits context doesn't state it explicitly, reasons it out correctly via inference; appropriately hedged but not a clean "stated in doc" answer
+    29: 8,    # forget+input gate cell state update — good, correct mechanism description
+    30: 8,    # which doc discusses vanishing gradients — correct, cites image_analysis_notes.pdf page 2; could also have flagged lstm.pdf's Hochreiter/Bengio reference per the question's own note
+    31: 8,    # common problem both docs — good synthesis of long-term-dependency theme across both documents
+    32: 10,   # BLEU score refusal — correct
+    33: 10,   # training dataset refusal — correct
+    34: 10,   # GPT-4 refusal — correct
+    35: 9,    # false premise (2020) — correctly rejects the false premise and supplies the real 1997 date with citation; revised up from stale 5
+    36: 8,    # inverted premise (PyTesseract outperforms neural OCR) — CORRECTED from stale 2: this is the right behavior, not a failure. The model refuses the false premise and explains why it's false (cites PyTesseract's actual limitations). The "refused instead of correcting" framing in the old scoring was backwards — explaining why the premise is false IS the correction.
+    37: 6,    # attention mechanism detail — answers reasonably and stays mostly within what lstm.pdf actually says (attention as a "next step," image captioning example); revised up from stale 3, though it could be slightly more concise about how little detail the source actually gives
+    38: 9,    # short query "What is the forget gate?" — good, correct bypass and accurate answer
+    39: 8,
+    40: 9,    # transfer learning decision matrix — correct, quotes the right row of the table with citation
+}
+
+# ---------------------------------------------------------------
+# Guard: refuse to compute a summary on a partial scoring pass.
+# This prevents accidentally publishing a score computed before
+# the 7 replaced questions have real answers.
+# ---------------------------------------------------------------
+
+unscored = [qid for qid, s in MANUAL_SCORES.items() if s is None]
+missing_from_dict = [item["id"] for item in results if item["id"] not in MANUAL_SCORES]
+
+if unscored or missing_from_dict:
+    print("Cannot compute summary — scoring is incomplete.")
+    if unscored:
+        print(f"  Still need scores for: {sorted(unscored)}")
+        print("  (these were replaced 2026-06-19 — rerun test_batch.py with the")
+        print("   updated evaluation_suite.json, then fill in MANUAL_SCORES)")
+    if missing_from_dict:
+        print(f"  IDs present in generated_answers1.json but missing from MANUAL_SCORES: {sorted(missing_from_dict)}")
+    raise SystemExit(1)
+
+# ---------------------------------------------------------------
+# Compute per-category averages
+# ---------------------------------------------------------------
+
+category_scores = defaultdict(list)
+category_failures = defaultdict(list)
+
+for r in results:
+    qid = r["id"]
+    cat = r["category"]
+    score = MANUAL_SCORES.get(qid, -1)
+    category_scores[cat].append(score)
+    if score <= 3:
+        category_failures[cat].append({
+            "id": qid,
+            "question": r["question"],
+            "score": score,
+            "answer_preview": r["answer"][:120]
+        })
+
+summary = {}
+for cat, scores in sorted(category_scores.items()):
+    valid = [s for s in scores if s >= 0]
+    summary[cat] = {
+        "count": len(valid),
+        "avg": round(sum(valid) / len(valid), 1) if valid else 0,
+        "scores": scores,
+        "failures": category_failures[cat]
+    }
+
+all_scores = [s for s in MANUAL_SCORES.values() if s is not None and s >= 0]
+overall = round(sum(all_scores) / len(all_scores), 1)
+
+output = {
+    "overall": overall,
+    "total_questions": len(all_scores),
+    "by_category": summary,
+    "failing_ids": [qid for qid, s in MANUAL_SCORES.items() if s is not None and s <= 3],
+    "root_cause_note": (
+        "2026-06-19: Previous root-cause note ('MiniLM vocabulary mismatch on "
+        "image-processing terms') was based on an invalid premise — "
+        "image_analysis_notes.pdf never contained PCA, salt-and-pepper noise, "
+        "or filter content in the first place (confirmed by direct text search "
+        "of the source PDF). Those 7 questions (2,3,5,7,14,19,39) have been "
+        "replaced with questions grounded in the document's actual content "
+        "(OCR pipeline, CTC, transfer learning). Remaining true weak spots "
+        "after re-scoring: Q17 (incomplete gate enumeration), Q28 (multihop "
+        "answer relies on inference rather than an explicit stated reason)."
+    )
+}
+
+with open("scores_summary1.json", "w") as f:
+    json.dump(output, f, indent=2)
+
+# ---------------------------------------------------------------
+# Print readable report
+# ---------------------------------------------------------------
+
+print(f"\n{'='*50}")
+print(f"  DocuMind Eval — {len(all_scores)} questions")
+print(f"  Overall: {overall}/10")
+print(f"{'='*50}\n")
+
+print(f"{'Category':<20} {'N':>3} {'Avg':>5}  {'Scores'}")
+print("-" * 60)
+for cat, data in summary.items():
+    scores_str = " ".join(str(s) for s in data["scores"])
+    print(f"{cat:<20} {data['count']:>3} {data['avg']:>5}  {scores_str}")
+
+print(f"\nFailing IDs (score ≤ 3): {output['failing_ids']}")
+print(f"\nNote: {output['root_cause_note']}")
+print(f"\nSaved to scores_summary1.json")

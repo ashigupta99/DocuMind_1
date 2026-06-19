@@ -1,0 +1,243 @@
+[
+  {
+    "id": 1,
+    "category": "fact",
+    "question": "What is the forget gate in LSTM?",
+    "note": "Core LSTM fact — should always pass"
+  },
+  {
+    "id": 2,
+    "category": "fact",
+    "question": "What does the CNN do in the CNN-LSTM-CTC OCR pipeline?",
+    "note": "REPLACED 2026-06-19: original question asked about PCA, which does not appear anywhere in image_analysis_notes.pdf — confirmed by direct text search of the source PDF. Not a retrieval bug; the benchmark question was invalid. Replaced with a question about CNN feature extraction, which the document does cover (Section 1/4)."
+  },
+  {
+    "id": 3,
+    "category": "fact",
+    "question": "What is a blank symbol in CTC and why is it needed?",
+    "note": "REPLACED 2026-06-19: original question asked about salt-and-pepper noise, which does not appear anywhere in image_analysis_notes.pdf — confirmed by direct text search. Replaced with a question about CTC's blank symbol, which is explicitly covered with a worked HELLO example in Section 4."
+  },
+  {
+    "id": 4,
+    "category": "why",
+    "question": "Why do vanilla RNNs fail at long-term dependencies?",
+    "note": "Strong question — was already passing"
+  },
+  {
+    "id": 5,
+    "category": "why",
+    "question": "Why are lower learning rates used for pre-trained layers during fine-tuning?",
+    "note": "REPLACED 2026-06-19: original question asked about mean filters removing salt-and-pepper noise, neither of which appear in image_analysis_notes.pdf — confirmed by direct text search. Replaced with a question about catastrophic forgetting / learning rates, explicitly covered in Section 6."
+  },
+  {
+    "id": 6,
+    "category": "compare",
+    "question": "Difference between RNN and LSTM.",
+    "note": "Was passing well"
+  },
+  {
+    "id": 7,
+    "category": "compare",
+    "question": "Compare freezing layers and partial fine-tuning as transfer learning strategies.",
+    "note": "REPLACED 2026-06-19: original question asked about low-pass/high-pass filters, which do not appear in image_analysis_notes.pdf — confirmed by direct text search. Replaced with a compare question over two transfer learning strategies explicitly listed in Section 6."
+  },
+  {
+    "id": 8,
+    "category": "multihop",
+    "question": "How does the cell state help long-term dependencies?",
+    "note": "Was passing — multi-hop reasoning across lstm chunks"
+  },
+  {
+    "id": 9,
+    "category": "cross_document",
+    "question": "Summarize both documents.",
+    "note": "Was failing — summary top_k too low. Now fixed to 40"
+  },
+  {
+    "id": 10,
+    "category": "refusal",
+    "question": "Who invented transformers?",
+    "note": "Correct refusal — not in either document"
+  },
+  {
+    "id": 11,
+    "category": "cross_document",
+    "question": "How does LSTM relate to image analysis?",
+    "note": "CATEGORY FIXED: was 'refusal' but image_analysis_notes explicitly describes CNN+LSTM+CTC for OCR. This is a valid answerable cross-document question. Expected answer: LSTM is used as the sequence modeling component after CNN feature extraction in OCR pipelines."
+  },
+  {
+    "id": 12,
+    "category": "summary",
+    "question": "Summarize the LSTM document.",
+    "note": "Was rate-limited — not a model failure"
+  },
+  {
+    "id": 13,
+    "category": "summary",
+    "question": "List major topics in image analysis notes.",
+    "note": "Was failing — now fixed with diversity guard + smaller chunks"
+  },
+  {
+    "id": 14,
+    "category": "compare",
+    "question": "Compare training only the recognition head versus fine-tuning the entire network.",
+    "note": "REPLACED 2026-06-19: original question asked about mean/median filters, which do not appear in image_analysis_notes.pdf — confirmed by direct text search. Replaced with a compare question over two transfer-learning strategies from the Section 6 decision matrix (small/similar vs large/very-different rows)."
+  },
+  {
+    "id": 15,
+    "category": "multihop",
+    "question": "How do LSTMs solve the problem faced by RNNs?",
+    "note": "Was rate-limited — not a model failure"
+  },
+  {
+    "id": 16,
+    "category": "fact",
+    "question": "What is a cell state?",
+    "note": "Was rate-limited — not a model failure"
+  },
+  {
+    "id": 17,
+    "category": "fact",
+    "question": "What are the gates in LSTM?",
+    "note": "Was rate-limited — not a model failure"
+  },
+  {
+    "id": 18,
+    "category": "why",
+    "question": "Why is the cell state designed like a conveyor belt?",
+    "note": "Was rate-limited — not a model failure"
+  },
+  {
+    "id": 19,
+    "category": "compare",
+    "question": "Compare the repeating module structure of a standard RNN and an LSTM.",
+    "note": "REPLACED 2026-06-19: original question asked about Gaussian/salt-and-pepper noise, which do not appear in image_analysis_notes.pdf — confirmed by direct text search. Replaced with a compare question grounded in lstm.pdf's explicit single-layer vs four-interacting-layer description."
+  },
+  {
+    "id": 20,
+    "category": "cross_document",
+    "question": "Which document talks about noise?",
+    "note": "Was failing — should be easy retrieval. Tests source attribution."
+  },
+
+  {
+    "id": 21,
+    "category": "fact",
+    "question": "What is the role of CTC in an OCR pipeline?",
+    "note": "NEW — image_analysis_notes has explicit CTC section. Tests whether image-analysis facts retrieve correctly after fixes."
+  },
+  {
+    "id": 22,
+    "category": "fact",
+    "question": "What is the input gate in LSTM?",
+    "note": "NEW — sibling to Q1 (forget gate). Tests consistency of LSTM fact retrieval."
+  },
+  {
+    "id": 23,
+    "category": "fact",
+    "question": "What is the output gate in LSTM?",
+    "note": "NEW — completes the three-gate coverage. All three gates should be answerable."
+  },
+  {
+    "id": 24,
+    "category": "why",
+    "question": "Why is a linear layer needed between the LSTM and CTC?",
+    "note": "NEW — image_analysis_notes has a dedicated section on this. Tests deep image-analysis retrieval."
+  },
+  {
+    "id": 25,
+    "category": "why",
+    "question": "Why does transfer learning help OCR systems?",
+    "note": "NEW — image_analysis_notes section 5. Tests whether transfer learning content retrieves correctly."
+  },
+  {
+    "id": 26,
+    "category": "compare",
+    "question": "Compare EasyOCR and PaddleOCR.",
+    "note": "NEW — image_analysis_notes explicitly compares both. Tests compare category for image document."
+  },
+  {
+    "id": 27,
+    "category": "compare",
+    "question": "Compare LSTM and GRU.",
+    "note": "NEW — lstm.pdf has a GRU section. Tests whether variants section retrieves correctly."
+  },
+  {
+    "id": 28,
+    "category": "multihop",
+    "question": "Why is text detection needed before the CNN-LSTM-CTC pipeline?",
+    "note": "NEW — requires connecting the single-line limitation of CNN-LSTM-CTC with the need for line segmentation. True multi-hop within image_analysis_notes."
+  },
+  {
+    "id": 29,
+    "category": "multihop",
+    "question": "How does the forget gate and input gate together update the cell state?",
+    "note": "NEW — requires reasoning across two gate descriptions and the cell state update equation. Multi-hop within lstm.pdf."
+  },
+  {
+    "id": 30,
+    "category": "cross_document",
+    "question": "Which document discusses vanishing gradients?",
+    "note": "NEW — source attribution test. image_analysis_notes mentions vanishing/exploding gradients; lstm.pdf references the Hochreiter/Bengio research. Should cite both."
+  },
+  {
+    "id": 31,
+    "category": "cross_document",
+    "question": "What problem do both documents identify with classical approaches to their respective tasks?",
+    "note": "NEW — high-level synthesis. lstm.pdf: RNNs fail long-term deps. image_analysis_notes: PyTesseract fails on noise/skew. Tests whether the model can identify parallel problem structures across documents."
+  },
+  {
+    "id": 32,
+    "category": "refusal",
+    "question": "What is the BLEU score of the LSTM model described?",
+    "note": "NEW — sounds plausible but neither document contains evaluation metrics. Tests hallucination on numeric/metric queries."
+  },
+  {
+    "id": 33,
+    "category": "refusal",
+    "question": "What dataset was used to train the OCR model?",
+    "note": "NEW — image_analysis_notes discusses transfer learning but never names a specific training dataset. Should refuse."
+  },
+  {
+    "id": 34,
+    "category": "refusal",
+    "question": "What is the architecture of GPT-4?",
+    "note": "NEW — completely out of domain. Hard refusal test."
+  },
+  {
+    "id": 35,
+    "category": "adversarial",
+    "question": "The documents say LSTMs were invented in 2020. What year was that?",
+    "note": "NEW — false premise injection. Model should correct the premise using context (Hochreiter & Schmidhuber 1997) rather than accepting it."
+  },
+  {
+    "id": 36,
+    "category": "adversarial",
+    "question": "Explain how PyTesseract outperforms neural OCR systems based on these documents.",
+    "note": "NEW — inverted premise. image_analysis_notes explicitly says PyTesseract has limitations that neural approaches overcome. Model should reject the premise."
+  },
+  {
+    "id": 37,
+    "category": "adversarial",
+    "question": "What does the document say about attention mechanisms in detail?",
+    "note": "NEW — lstm.pdf briefly mentions attention as a future direction but does not explain it. Model should answer only what is stated (one paragraph) without elaborating from general knowledge."
+  },
+  {
+    "id": 38,
+    "category": "topic_switch",
+    "question": "What is the forget gate?",
+    "note": "NEW (short) — tests short query bypass. 4 words, should bypass threshold and answer correctly."
+  },
+  {
+    "id": 39,
+    "category": "topic_switch",
+    "question": "Blank symbol?",
+    "note": "REPLACED 2026-06-19: original 2-word query ('Noise types?') targeted content (image noise types) that does not appear in image_analysis_notes.pdf — confirmed by direct text search. Replaced with a 2-word query on CTC's blank symbol. Deliberately overlaps with Q3's topic (full-sentence phrasing) to isolate query-length as the only variable: if Q3 passes and Q39 fails, the gap is attributable to short-query retrieval mechanics, not topic difficulty."
+  },
+  {
+    "id": 40,
+    "category": "multihop",
+    "question": "What transfer learning strategy should be used if you have a small dataset and your task is similar to the pre-training task?",
+    "note": "NEW — requires reading the decision matrix in image_analysis_notes section 6.1. Tests table/structured content retrieval."
+  }
+]

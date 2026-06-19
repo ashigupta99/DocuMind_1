@@ -1,5 +1,5 @@
 import streamlit as st
-from rag import load_documents, chunk_documents, build_index, generate_answer
+from rag import load_documents, chunk_documents, build_index, build_bm25_index, generate_answer
 
 st.set_page_config(page_title="DocuMind", page_icon="📚", layout="wide")
 
@@ -7,6 +7,7 @@ st.set_page_config(page_title="DocuMind", page_icon="📚", layout="wide")
 if "initialized" not in st.session_state:
     st.session_state.initialized = True
     st.session_state.index = None
+    st.session_state.bm25_index = None
     st.session_state.chunks = None
     st.session_state.qa_history = []
 
@@ -43,7 +44,9 @@ with st.sidebar:
                 else:
                     chunks = chunk_documents(docs)
                     index, stored_chunks = build_index(chunks)
+                    bm25_index = build_bm25_index(stored_chunks)
                     st.session_state.index = index
+                    st.session_state.bm25_index = bm25_index
                     st.session_state.chunks = stored_chunks
                     st.session_state.qa_history = []
                     st.success(f"Indexed {len(chunks)} chunks from {len(docs)} pages/sections.")
@@ -97,6 +100,7 @@ else:
                 result = generate_answer(
                     query,
                     st.session_state.index,
+                    st.session_state.bm25_index,
                     st.session_state.chunks,
                     history=st.session_state.qa_history
                 )

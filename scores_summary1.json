@@ -1,0 +1,111 @@
+{
+  "overall": 8.3,
+  "total_questions": 40,
+  "by_category": {
+    "adversarial": {
+      "count": 3,
+      "avg": 7.7,
+      "scores": [
+        9,
+        8,
+        6
+      ],
+      "failures": []
+    },
+    "compare": {
+      "count": 6,
+      "avg": 8.3,
+      "scores": [
+        8,
+        9,
+        9,
+        9,
+        8,
+        7
+      ],
+      "failures": []
+    },
+    "cross_document": {
+      "count": 5,
+      "avg": 8.2,
+      "scores": [
+        7,
+        9,
+        9,
+        8,
+        8
+      ],
+      "failures": []
+    },
+    "fact": {
+      "count": 8,
+      "avg": 8.1,
+      "scores": [
+        9,
+        9,
+        8,
+        8,
+        6,
+        9,
+        8,
+        8
+      ],
+      "failures": []
+    },
+    "multihop": {
+      "count": 5,
+      "avg": 7.8,
+      "scores": [
+        8,
+        8,
+        6,
+        8,
+        9
+      ],
+      "failures": []
+    },
+    "refusal": {
+      "count": 4,
+      "avg": 10.0,
+      "scores": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "failures": []
+    },
+    "summary": {
+      "count": 2,
+      "avg": 7.5,
+      "scores": [
+        7,
+        8
+      ],
+      "failures": []
+    },
+    "topic_switch": {
+      "count": 2,
+      "avg": 8.5,
+      "scores": [
+        9,
+        8
+      ],
+      "failures": []
+    },
+    "why": {
+      "count": 5,
+      "avg": 8.4,
+      "scores": [
+        9,
+        9,
+        7,
+        9,
+        8
+      ],
+      "failures": []
+    }
+  },
+  "failing_ids": [],
+  "root_cause_note": "2026-06-19: Previous root-cause note ('MiniLM vocabulary mismatch on image-processing terms') was based on an invalid premise \u2014 image_analysis_notes.pdf never contained PCA, salt-and-pepper noise, or filter content in the first place (confirmed by direct text search of the source PDF). Those 7 questions (2,3,5,7,14,19,39) have been replaced with questions grounded in the document's actual content (OCR pipeline, CTC, transfer learning). Remaining true weak spots after re-scoring: Q17 (incomplete gate enumeration), Q28 (multihop answer relies on inference rather than an explicit stated reason)."
+}

@@ -1,0 +1,2322 @@
+[
+    {
+        "id": 1,
+        "category": "fact",
+        "question": "What is the forget gate in LSTM?",
+        "answer": "The forget gate in LSTM is a sigmoid layer that decides what information to throw away from the cell state. It looks at the previous hidden state (ht-1) and the current input (xt), and outputs a number between 0 and 1 for each number in the cell state (Ct-1). A value of 1 represents \"completely keep this\" while a value of 0 represents \"completely get rid of this\" (Source: lstm.pdf, page 4). \n\nThis gate is one of the three gates in an LSTM, which are used to protect and control the cell state (Source: lstm.pdf, page 5). The forget gate's decision is crucial in determining what information to retain and what to discard from the cell state, allowing the LSTM to selectively remember and forget information as needed.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 5.981765080180543
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 6.341284334735844
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 4.854911979355559
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 3.762478591895187
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 1.21606772930119
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.2401200434357493
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 0.9482512249747888
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.2401200434357493
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 2.660189995773957
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 2.493048944513179
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "category": "fact",
+        "question": "What does the CNN do in the CNN-LSTM-CTC OCR pipeline?",
+        "answer": "The CNN (Convolutional Neural Network) in the CNN-LSTM-CTC OCR pipeline is used for feature extraction. It processes the input text image and learns high-level visual representations such as edges, strokes, and character shapes (Source: image_analysis_notes.pdf, page 2 and 3). \n\nSpecifically, the CNN converts the image into a compact feature map that encodes the visual structure of the text, rather than explicitly detecting characters (Source: image_analysis_notes.pdf, page 2). The extracted features are then passed to the RNN (Recurrent Neural Network) for sequence modeling and classification. \n\nNo further information is available in the context about the specific architecture or configuration of the CNN.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 12.353885570239125
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 8.44364233403381
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 8.678874858335881
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 8.17488716677004
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 6.946449253582982
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 7.4288013439171925
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 7.075370903630878
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 5.452323838354088
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 6.074661825538399
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 6.004648368656556
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "category": "fact",
+        "question": "What is a blank symbol in CTC and why is it needed?",
+        "answer": "A blank symbol in CTC is a special symbol that is used to represent the absence of a character at a particular position in the sequence (Source: [1], page 3; [6], page 4). It is needed because the sequence of predictions produced by the LSTM does not have a fixed alignment with the target text, and a single character may span multiple timesteps (Source: [8], page 4). The blank symbol allows the model to handle repeated predictions and blank symbols internally, producing the final readable text output directly from the network predictions (Source: [4], page 2). During decoding, CTC collapses consecutive repeated characters and removes blank symbols, transforming the raw prediction sequence into the final output (Source: [3], page 4). \n\nNote: The context does not provide a detailed explanation of why the blank symbol is necessary from a theoretical perspective, but it explains its role in the CTC mechanism and how it is used in the OCR architecture.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 8.816356486952763
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 7.97996165273922
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 5.946623111322655
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 5.922548811114353
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 6.284407419408752
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 5.5742617523535225
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 4.553075114904688
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 3.0807603689193215
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 4.437887731713461
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.9804297078861732
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "category": "why",
+        "question": "Why do vanilla RNNs fail at long-term dependencies?",
+        "answer": "Vanilla RNNs fail at long-term dependencies due to training issues such as vanishing and exploding gradients ([3], image_analysis_notes.pdf, page 2). This is also mentioned in [2] (lstm.pdf, page 2), which states that \"in practice, RNNs don\u2019t seem to be able to learn\" long-term dependencies, despite being theoretically capable of handling them. However, the context does not provide a detailed explanation of why vanishing and exploding gradients occur, only that they are a limitation of classical RNNs.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 8.752795715952928
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 8.510933818534758
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 8.013561489731583
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 5.759759176971859
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 8.355254892495292
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 4.240665748041589
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 5.56364049840575
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 5.051794375597115
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 4.507661129896292
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 4.019959196384559
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "category": "why",
+        "question": "Why are lower learning rates used for pre-trained layers during fine-tuning?",
+        "answer": "Lower learning rates are used for pre-trained layers during fine-tuning because pre-trained layers already encode useful and general visual representations. Using large updates can cause \"catastrophic forgetting\", where the model overwrites previously learned features such as edges, strokes, and basic character shapes. Lower learning rates ensure slow and controlled adaptation to the target domain, allowing the model to refine its representations (Source: [1] image_analysis_notes.pdf, page 6, and also mentioned in [2] image_analysis_notes.pdf, page 6).",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 18.919967791417022
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 27.373396353989655
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 10.909665038128395
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 13.026728805478712
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 10.650800837306791
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 10.849026649266131
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 5.035695360978615
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 8.99196033383782
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 3.994889320199028
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 2.737743322700666
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "category": "compare",
+        "question": "Difference between RNN and LSTM.",
+        "answer": "The difference between RNN and LSTM is primarily related to their ability to handle long-term dependencies. According to [7] (Source: image_analysis_notes.pdf, page 2), classical RNNs struggle to learn long-term dependencies due to training issues such as vanishing and exploding gradients.\n\nIn contrast, LSTMs are explicitly designed to avoid the long-term dependency problem, as stated in [10] (Source: lstm.pdf, page 3). LSTMs have a more complex structure than standard RNNs, with four interacting layers in the repeating module, as described in [5] (Source: lstm.pdf, page 3).\n\nAdditionally, [3] (Source: lstm.pdf, page 3) mentions that LSTMs are a special kind of RNN, capable of learning long-term dependencies, and were introduced to address the limitations of traditional RNNs.\n\nWhile the context provides a general understanding of the differences between RNNs and LSTMs, it does not provide a detailed, technical comparison of the two. However, based on the available information, it can be concluded that LSTMs are more effective in handling long-term dependencies and are a more advanced type of RNN.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 5.790668438459395
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 6.2715554521829215
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 3.90270180145185
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 3.7594740353539144
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 2.6535475817527643
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.610427093597888
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 2.882777949118872
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.6995363281978895
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.0330799906217836
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 0.7333086836338043
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "category": "compare",
+        "question": "Compare freezing layers and partial fine-tuning as transfer learning strategies.",
+        "answer": "Freezing layers and partial fine-tuning are two transfer learning strategies used in OCR models. \n\nFreezing layers involves keeping the weights of a layer fixed during training, so they are not updated by backpropagation. This is often applied to early convolutional layers in OCR models, as they capture general visual features such as edges, strokes, and simple shapes, which are transferable across different text styles and domains (Source: image_analysis_notes.pdf, page 6).\n\nPartial fine-tuning, on the other hand, involves fine-tuning only a subset of layers, typically the later layers, to adapt higher-level representations, such as character shapes or writing styles, while retaining robust low-level features learned during pre-training (Source: image_analysis_notes.pdf, page 6).\n\nThe key difference between the two strategies is the extent to which the pre-trained model is modified. Freezing layers preserves the pre-trained features, while partial fine-tuning allows for more adaptation to the new task or domain.\n\nThe choice between these strategies depends on the amount of available data and the similarity between the new task and the original pre-training task. For example, if the new task is similar to the original task and only a small dataset is available, freezing the backbone and training only the recognition head is recommended (Source: image_analysis_notes.pdf, page 7). In contrast, if the new task is moderately different from the original task, partial fine-tuning of higher layers may be more suitable (Source: image_analysis_notes.pdf, page 7).\n\nLimitations of this comparison include the lack of information on the specific performance metrics or results of each strategy, as well as the potential interactions between these strategies and other hyperparameters or model architectures. However, based on the provided context, it is clear that both freezing layers and partial fine-tuning are useful transfer learning strategies in OCR, and the choice between them depends on the specific application requirements and available data.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 17.400341094709805
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 14.029858727711003
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 13.64539732540354
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 11.875802589095654
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 10.3993765219645
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 7.039978709970782
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 11.304050083301274
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 7.820663417215809
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 6.978531980070493
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 4.4124289490320745
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "category": "multihop",
+        "question": "How does the cell state help long-term dependencies?",
+        "answer": "The cell state in LSTMs helps with long-term dependencies by allowing information to flow through it with minimal changes. According to [3] (Source: lstm.pdf, page 4), \"The cell state is kind of like a conveyor belt. It runs straight down the entire chain, with only some minor linear interactions. It\u2019s very easy for information to just flow along it unchanged.\" This design enables LSTMs to remember information for long periods, which is their default behavior, as stated in [9] (Source: lstm.pdf, page 3). The cell state can be updated or modified by the gates, which regulate the addition or removal of information, as explained in [4] (Source: lstm.pdf, page 5) and [7] (Source: lstm.pdf, page 5). However, the exact mechanism of how the cell state handles long-term dependencies is not fully detailed in the provided context.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 6.1482207881307485
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 6.3385055174433145
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 6.145580000095034
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 6.26761828035226
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 5.56364049840575
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 5.0950718841444145
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 4.873566862959376
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 5.120018728774101
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 4.247245861238741
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 4.077031914309213
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "category": "cross_document",
+        "question": "Summarize both documents.",
+        "answer": "The context provides information from two documents: \"image_analysis_notes.pdf\" and \"lstm.pdf\". \n\nThe \"image_analysis_notes.pdf\" document discusses Optical Character Recognition (OCR) and its limitations, particularly with PyTesseract (Source: [1]). It highlights the importance of text detection and line segmentation in OCR systems, as the recognition model is designed for single-line text (Source: [2], [3], [10]). The document also mentions the use of pre-trained models, such as PaddleOCR, which offers a modular pipeline for text detection and recognition (Source: [4], [5]). Additionally, it provides guidelines for choosing a transfer learning strategy based on the amount of available data and task similarity (Source: [9]).\n\nThe \"lstm.pdf\" document discusses Long Short Term Memory (LSTM) and its applications, particularly in language models (Source: [6], [8]). It explains how LSTMs can learn to use past information to perform tasks, such as predicting the next word in a sentence (Source: [6]). The document also mentions variants of LSTM and its ability to output information relevant to the next task (Source: [8]).\n\nThe main limitation of this summary is that the context only provides selected pages from the documents, which may not represent the complete content of the documents. However, based on the available information, it appears that the \"image_analysis_notes.pdf\" document focuses on OCR and transfer learning, while the \"lstm.pdf\" document focuses on LSTM and its applications in language models. \n\nSources: \n- image_analysis_notes.pdf (pages 2, 4, 5, 6, 7)\n- lstm.pdf (pages 2, 6)",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 2.9429934594258906
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.843730679929153
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.9024682343924204
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 0.41352711319923396
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 0.4131024122238159
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 0.40513181090354916
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "category": "refusal",
+        "question": "Who invented transformers?",
+        "answer": "I couldn't find relevant information in the uploaded documents to answer this question. The context mentions transformer-based encoders (Source: image_analysis_notes.pdf, page 6) but does not provide information about the invention of transformers.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 5.489367871774307
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 0.427559357881546
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 0.0
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "category": "cross_document",
+        "question": "How does LSTM relate to image analysis?",
+        "answer": "According to the context, LSTM (Long Short-Term Memory) is related to image analysis in the following way: \n\nAfter a CNN (Convolutional Neural Network) processes an image, it produces a high-level feature tensor that encodes the visual structure of the text (Source: [10], page 3). This tensor is then passed through an LSTM, which performs sequence modeling and classification (Source: [3], page 2). The LSTM reads the CNN features from left to right and learns the temporal dependencies between characters (Source: [3], page 2). \n\nThe LSTM outputs a vector at each timestep, which corresponds to one vertical strip of the image (Source: [1], page 3). These vectors are then fed into a linear layer, which maps the LSTM output space to the character space (Source: [5], page 3). \n\nHowever, the context does not provide a detailed explanation of how the LSTM architecture works. It only mentions that LSTMs are used to capture left-to-right dependencies and contextual relationships between characters (Source: [6], page 4). For more information on LSTMs, the context refers to external resources (Source: [7], page 3). \n\nAdditionally, the context provides some information on the internal workings of LSTMs, such as the use of a forget gate layer (Source: [9], page 4), but this information is limited and does not provide a comprehensive understanding of the LSTM architecture. \n\nIn summary, the context establishes a relationship between LSTM and image analysis, but the information provided is limited to the role of LSTMs in processing CNN features and outputting character probabilities. Further details on the internal workings of LSTMs are not fully explained in the context.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 3.7925097153453304
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 4.266412929209007
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.767835746650544
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 3.9062880072186927
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.402620758365548
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.7368224700105204
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.3064253157764067
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 2.3846892070806383
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 2.3790930012991462
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.9143971493324532
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "category": "summary",
+        "question": "Summarize the LSTM document.",
+        "answer": "The LSTM document, as per the provided context, appears to be a tutorial or explanatory guide on Long Short-Term Memory (LSTM) networks, a type of Recurrent Neural Network (RNN). \n\nAccording to [2] (Source: lstm.pdf, page 3), the repeating module in an LSTM contains four interacting layers, but the details are not provided in the given context. \n\nThe document walks through the LSTM diagram step by step, as mentioned in [2] (Source: lstm.pdf, page 3), but the context only provides information up to the \"forget gate layer\" in [4] (Source: lstm.pdf, page 4). This layer decides what information to throw away from the cell state.\n\nAdditionally, [9] (Source: lstm.pdf, page 1) explains that LSTMs are used because humans don't start their thinking from scratch every second, and their thoughts have persistence. \n\nThe context also mentions that there are variants of LSTMs, as stated in [8] (Source: lstm.pdf, page 6), but the differences are minor and not fully explained in the given context.\n\nIt is also worth noting that the context provides some information on the application of LSTMs in image analysis, specifically in the CNN-LSTM-CTC architecture for recognizing single-line text, as mentioned in [10] (Source: image_analysis_notes.pdf, page 4) and [1] (Source: image_analysis_notes.pdf, page 3). However, this seems to be a secondary topic in the context.\n\nOverall, the provided context gives a limited overview of the LSTM document, and more information would be required to fully summarize the document.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.2401200434357493
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 1.4230730999810017
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 1.3046299568116742
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 1.227976119758431
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.485585974820042
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 1.0174989093423474
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.2401200434357493
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 0.993319290107168
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 1,
+                "score": 1.0012504549590986
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 0.6304902017116546
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "category": "summary",
+        "question": "List major topics in image analysis notes.",
+        "answer": "Based on the provided context, the major topics in image analysis notes are:\n\n1. **OCR Pipeline**: The notes discuss the PyTesseract OCR pipeline and its limitations (Source: [6], page 2).\n2. **CNN-LSTM-CTC Architecture**: The architecture is designed for recognizing single-line text and consists of three core components: a Convolutional Neural Network (CNN), a Recurrent Neural Network (RNN), and Connectionist Temporal Classification (CTC) (Source: [2], page 2).\n3. **Sequence Learning Problem**: The notes model OCR as a sequence learning problem using the CNN-LSTM-CTC architecture (Source: [2], page 2).\n4. **Feature Extraction**: The CNN is used for feature extraction, processing the input text image and learning high-level visual representations (Source: [2], page 2).\n5. **Sequence Modeling and Classification**: The RNN, typically an LSTM, performs sequence modeling and classification (Source: [8], page 2).\n6. **Connectionist Temporal Classification (CTC)**: CTC is used to transform the raw prediction sequence into the final output (Source: [5], page 4).\n7. **Transfer Learning**: Modern OCR systems commonly rely on transfer learning to address challenges such as limited data and slow convergence (Source: [4], page 5).\n8. **Challenges in OCR**: The notes discuss challenges in OCR, including sensitivity to variations in font styles, character shapes, image quality, illumination, and background noise (Source: [4], page 5).\n\nLimitations: The context provides a comprehensive overview of the major topics in image analysis notes, but it may not be exhaustive, as some pages or sections might be missing. Additionally, some topics, such as the role of attention in RNNs, are briefly mentioned but not fully explored (Source: [3], page 7).",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.6051347003746264
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 1.900448143100461
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.3685592662987074
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 1.900448143100461
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 1.7957709296096633
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 1.8208440794786849
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.9143971493324532
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 1.7594297247235466
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.7594297247235466
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "category": "compare",
+        "question": "Compare training only the recognition head versus fine-tuning the entire network.",
+        "answer": "According to the context, training only the recognition head and fine-tuning the entire network are two different strategies used in transfer learning for OCR tasks.\n\nTraining only the recognition head involves keeping the convolutional backbone and sequence model fixed, and only training the final classification layers (Source: [2], page 6). This approach is useful when the available dataset is small, as it minimizes overfitting while still allowing adaptation to a new character set or language (Source: [2], page 6, and [3], page 7).\n\nOn the other hand, fine-tuning the entire network involves updating the weights of all layers, including the pre-trained ones, to adapt to the new task (Source: [1], page 7, and [5], page 6). This approach is recommended when the new task is very different from the original pre-training task and a large dataset is available (Source: [1], page 7).\n\nThe key differences between these two strategies are:\n\n* The scope of training: training only the recognition head updates only the final classification layers, while fine-tuning the entire network updates all layers.\n* The amount of data required: training only the recognition head is suitable for small datasets, while fine-tuning the entire network requires a large dataset.\n* The level of adaptation: training only the recognition head allows for limited adaptation to the new task, while fine-tuning the entire network allows for more extensive adaptation.\n\nHowever, the context does not provide a direct comparison of the performance of these two strategies, and the choice between them depends on the specific task and dataset (Source: [1], page 7).",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 15.961338487089803
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 15.392063210471798
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 14.002447196424596
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 6.394619745218391
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 9.0633748558367
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 5.686944633260586
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.8014668715055535
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.1628205729403795
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 2.5629781389560318
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.206946250464812
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "category": "multihop",
+        "question": "How do LSTMs solve the problem faced by RNNs?",
+        "answer": "According to the context, LSTMs are \"explicitly designed to avoid the long-term dependency problem\" ([3], lstm.pdf, page 3). They are capable of \"learning long-term dependencies\" and \"remembering information for long periods of time is practically their default behavior, not something they struggle to learn!\" ([3], lstm.pdf, page 3, and [7], lstm.pdf, page 3). \n\nThe context does not provide a detailed explanation of how LSTMs solve the problem of long-term dependencies, but it mentions that they work \"tremendously well on a large variety of problems\" ([7], lstm.pdf, page 3). The problem of long-term dependencies in RNNs is attributed to \"vanishing and exploding gradients\" ([8], image_analysis_notes.pdf, page 2), but the context does not explicitly state how LSTMs address this issue.\n\nIn summary, while the context provides some information on the capabilities of LSTMs, it does not offer a detailed explanation of how they solve the problem of long-term dependencies faced by RNNs.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 9.674023642583709
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 4.345831378378942
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 4.874212295419689
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 4.681496640708859
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 3.8145653402766473
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 4.561600564870163
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 2.9492155106150517
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 4.314351419754402
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 3.8989264580071126
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 3.9638761067073105
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "category": "fact",
+        "question": "What is a cell state?",
+        "answer": "According to the context, a cell state is \"kind of like a conveyor belt\" that \"runs straight down the entire chain, with only some minor linear interactions\" (Source: lstm.pdf, page 4). It is a key component of LSTMs, and its purpose is to store information. The cell state is regulated by structures called gates, which control the flow of information into and out of the cell state (Source: lstm.pdf, page 4). \n\nThe cell state is used to store information such as the gender of the present subject in a language model, and it can be updated or forgotten as new information is processed (Source: lstm.pdf, pages 5 and 6). \n\nWhile the context provides a general understanding of the cell state, it does not provide a detailed, technical definition. However, based on the information available, it can be inferred that the cell state is a crucial component of LSTMs that allows them to store and manage information over time.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 6.145580000095034
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 6.26761828035226
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 5.0950718841444145
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 4.873566862959376
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 5.120018728774101
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 3.8948080817390243
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 3.4343156198297087
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 4.077031914309213
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 3.3897842544295216
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.526850793290489
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "category": "fact",
+        "question": "What are the gates in LSTM?",
+        "answer": "According to the context, gates in LSTM are a way to optionally let information through, composed of a sigmoid neural net layer and a pointwise multiplication operation (Source: lstm.pdf, page 4). The sigmoid layer outputs numbers between zero and one, describing how much of each component should be let through. \n\nAn LSTM has three of these gates, to protect and control the cell state (Source: lstm.pdf, page 4). One of the gates is specifically called the \"forget gate layer,\" which decides what information to throw away from the cell state (Source: lstm.pdf, page 4). \n\nHowever, the context does not provide a detailed explanation of all three gates. It only mentions the forget gate and the update gate in the context of the Gated Recurrent Unit (GRU), which combines the forget and input gates into a single \"update gate\" (Source: lstm.pdf, page 7). \n\nTherefore, while we know that there are three gates in an LSTM and that one of them is the forget gate, the context does not provide a complete description of all three gates.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 5.602161500105657
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 4.0169688670220856
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 3.9871968664980906
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 1.6608756636775506
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 1.7846454470865323
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.9515242182039854
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.6877551207582344
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 1.227976119758431
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 1.4230730999810017
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 1.311230726933264
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "category": "why",
+        "question": "Why is the cell state designed like a conveyor belt?",
+        "answer": "The context does not explicitly state why the cell state is designed like a conveyor belt. However, according to [1] (Source: lstm.pdf, page 4), the cell state is described as being \"kind of like a conveyor belt\" because \"it runs straight down the entire chain, with only some minor linear interactions\" and \"it\u2019s very easy for information to just flow along it unchanged.\" This suggests that the conveyor belt design allows for easy information flow, but the underlying reason for this design choice is not explicitly stated in the provided context.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 15.242144374902335
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 5.080772563184871
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 5.0950718841444145
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 4.873566862959376
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 6.26761828035226
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 5.120018728774101
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 4.077031914309213
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 3.4343156198297087
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.526850793290489
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 1.8867009416889349
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "category": "compare",
+        "question": "Compare the repeating module structure of a standard RNN and an LSTM.",
+        "answer": "According to the context, the repeating module structure of a standard RNN and an LSTM differ in the number of layers. \n\nA standard RNN has a repeating module that contains a single layer (Source: [1], [2] lstm.pdf, page 3). \n\nIn contrast, an LSTM has a repeating module that contains four interacting layers (Source: [1], [3] lstm.pdf, page 3).\n\nThis information is consistently stated across multiple sources in the context, providing a clear comparison between the two. (Source: lstm.pdf, pages 2-3)",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 20.202175187264952
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 15.984874102772586
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 8.32021143786914
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 4.044487037981959
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 5.431922090782809
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 3.90270180145185
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 3.6710638623990315
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 3.7594740353539144
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 0.6552353858947753
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 6.539953513254279
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "category": "cross_document",
+        "question": "Which document talks about noise?",
+        "answer": "The documents that talk about noise are [3] (Source: image_analysis_notes.pdf, page 2) and [6] (Source: image_analysis_notes.pdf, page 5). \n\nIn [3], it is mentioned that PyTesseract has a limitation of being \"sensitive to noise, skew, and font variations\" (Source: image_analysis_notes.pdf, page 2). \n\nIn [6], it is stated that \"OCR systems are highly sensitive to variations in font styles, character shapes, image quality, illumination, and background noise\" (Source: image_analysis_notes.pdf, page 5).\n\nThere is no mention of noise in the other documents related to LSTM.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 6.550565859932815
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 3.072116790088495
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 2.6942352854858376
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 2.921328859627797
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 0.41785202026367185
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 2.8120224587506963
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 0.41468501687049864
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 2.784650561281042
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 0.40138431191444396
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 2.73238576258492
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "category": "fact",
+        "question": "What is the role of CTC in an OCR pipeline?",
+        "answer": "The role of Connectionist Temporal Classification (CTC) in an OCR pipeline is to enable end-to-end training by allowing the model to predict repeated characters and special blank symbols, and then automatically collapsing these predictions into the final text sequence (Source: [10], page 4). CTC removes the need for explicit character-level segmentation and provides a principled mechanism for mapping variable-length prediction sequences to variable-length text outputs (Source: [10], page 4). It handles repeated predictions and blank symbols internally, producing the final readable text output directly from the network predictions (Source: [4], page 2). Additionally, CTC collapses consecutive repeated characters and removes blank symbols during decoding, transforming the raw prediction sequence into the final output (Source: [9], page 4). \n\nNote that the context does not provide a comprehensive explanation of the internal workings of CTC, but it highlights its key role in the OCR pipeline.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 7.53392454582961
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 6.960581199702347
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.894765376193611
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.787113184959823
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 4.622182899526842
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 4.456191824337797
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.867575372621384
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.223399805047701
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.6204514748716305
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.662507945183217
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "category": "fact",
+        "question": "What is the input gate in LSTM?",
+        "answer": "The input gate in LSTM is a sigmoid layer that decides which values to update in the cell state. According to [3] (Source: lstm.pdf, page 5), it is the first part of deciding what new information to store in the cell state. The input gate layer decides which values to update, and then a tanh layer creates a vector of new candidate values that could be added to the state. \n\nAs mentioned in [5] (Source: lstm.pdf, page 4), gates are composed of a sigmoid neural net layer and a pointwise multiplication operation, where the sigmoid layer outputs numbers between zero and one, describing how much of each component should be let through. \n\nHowever, the context does not provide a detailed explanation of the input gate's functionality beyond this. For more information, it is recommended to refer to the provided resources, such as the LSTM explanation in [10] (Source: image_analysis_notes.pdf, page 3).",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 6.169217675751745
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 3.6048705999694874
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 4.816433681856704
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 3.762478591895187
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 1.21606772930119
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.2401200434357493
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.2401200434357493
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 1.3046299568116742
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 1.4230730999810017
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.4914757417752824
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "category": "fact",
+        "question": "What is the output gate in LSTM?",
+        "answer": "The output gate in LSTM is described in [3] (Source: lstm.pdf, page 6) as a process where a sigmoid layer decides what parts of the cell state to output. Then, the cell state is put through a tanh function (to push the values to be between -1 and 1) and multiplied by the output of the sigmoid gate, so that only the decided parts are outputted. \n\nThis process can be summarized as a filtered version of the cell state, where the filtering is done by the sigmoid gate. However, the exact mathematical formulation of the output gate is not provided in the given context, limiting the completeness of the answer.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 3.812933719586505
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 3.6048705999694874
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 5.719750709245231
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 3.762478591895187
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 3.679509371153889
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.904065714721089
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.544175475803502
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 1.21606772930119
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 3.201564404875019
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 3.1839006178863087
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "category": "why",
+        "question": "Why is a linear layer needed between the LSTM and CTC?",
+        "answer": "A linear layer is needed between the LSTM and CTC because the LSTM outputs do not represent characters or probabilities directly, and therefore cannot be used by CTC as-is. CTC requires a probability distribution over the character set at each timestep, which the linear layer provides by performing a simple learned mapping from the LSTM output space to the character space (Source: [1] image_analysis_notes.pdf, page 3, and [3] image_analysis_notes.pdf, page 3). The linear layer applies a linear transformation to the LSTM output vector, followed by a softmax function, to produce a probability distribution over all characters and the blank symbol. \n\nThis information is available in the context, but it does not provide a deeper explanation of why the LSTM outputs cannot be used directly by CTC, beyond stating the requirement for a probability distribution.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 13.444920673796771
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 7.934552419369166
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 8.243502677782164
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 6.830589395645236
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 1,
+                "score": 6.888452727428093
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 4.220549751321922
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 5.987021881041054
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 4.57329511432274
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 4.663834037739676
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.457498158194996
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "category": "why",
+        "question": "Why does transfer learning help OCR systems?",
+        "answer": "Transfer learning helps OCR systems because it allows them to leverage pre-trained models that have already captured rich visual and structural representations of text (Source: [4], image_analysis_notes.pdf, page 5). This enables the system to converge faster, require less data, and achieve better performance. The pre-trained models can be fine-tuned to adapt to new font styles, languages, or visual domains with relatively little additional data (Source: [6], image_analysis_notes.pdf, page 5). \n\nThe context does not provide a detailed explanation of why transfer learning is effective in general, but it highlights its benefits in the context of OCR systems, such as reducing the need for large amounts of labeled data and significant computational resources (Source: [1], [2], [3], image_analysis_notes.pdf, page 5). \n\nIt is also mentioned that transfer learning techniques, such as freezing layers and partial fine-tuning, can be employed to balance generalization, stability, and data efficiency (Source: [7], [9], image_analysis_notes.pdf, page 6). However, the underlying reasons for the effectiveness of these techniques are not explicitly stated in the context.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 8.937581668012747
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 10.5386838265238
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 8.208959552169606
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 4.927545650150054
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 6.943699720433776
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 5.627388158396215
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 4.694867379639416
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 5.293060518760054
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 6.411116370012358
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 4.472845193826414
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "category": "compare",
+        "question": "Compare EasyOCR and PaddleOCR.",
+        "answer": "EasyOCR and PaddleOCR are two OCR frameworks with different design philosophies. According to [3] and [5] (Source: image_analysis_notes.pdf, page 5), EasyOCR is designed to be lightweight and easy to use, making it well-suited for rapid prototyping and small to medium-scale applications. It primarily focuses on text recognition using a pre-trained CNN\u2013LSTM\u2013CTC pipeline.\n\nIn contrast, PaddleOCR is a more comprehensive and production-oriented OCR framework that is explicitly designed around transfer learning [1] (Source: image_analysis_notes.pdf, page 5). It offers a modular pipeline consisting of separate pre-trained models for text detection and text recognition, allowing for more flexibility and customization [2] (Source: image_analysis_notes.pdf, page 5).\n\nA key advantage of PaddleOCR's modular design is that it allows practitioners to trade off between interpretability, computational cost, and modeling capacity by choosing different architectures, such as ResNet-based networks or lightweight architectures like MobileNet [4] (Source: image_analysis_notes.pdf, page 6).\n\nThe main limitation of this comparison is that the context does not provide a direct performance comparison between EasyOCR and PaddleOCR. However, based on the information available, it can be inferred that PaddleOCR is more flexible and customizable, while EasyOCR is more lightweight and easy to use.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 8.50730736805372
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 4.69983153963588
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 5.842019201798687
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 4.272409515517513
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 4.535328788251728
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 1.5766605104614675
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 1.5405016865534693
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 1.4149532237607234
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 1.636185607627048
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 0.5375125467777252
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "category": "compare",
+        "question": "Compare LSTM and GRU.",
+        "answer": "Based on the provided context, a comparison between LSTM and GRU can be made as follows:\n\nLSTM (Long Short-Term Memory) networks are a special kind of RNN, capable of learning long-term dependencies (Source: lstm.pdf, page 3). They were introduced by Hochreiter & Schmidhuber (1997) and have been refined and popularized by many people in following work (Source: lstm.pdf, page 3).\n\nGRU (Gated Recurrent Unit), on the other hand, is a slightly more dramatic variation on the LSTM, introduced by Cho, et al. (2014) (Source: lstm.pdf, page 7). It combines the forget and input gates into a single \u201cupdate gate\u201d and merges the cell state and hidden state, making some other changes. The resulting model is simpler than standard LSTM models and has been growing increasingly popular (Source: lstm.pdf, page 7).\n\nThe main difference between LSTM and GRU is the simplification of gates in GRU, where the forget and input gates are combined into a single update gate. However, the context does not provide a detailed comparison of their performance, advantages, or limitations.\n\nLimitation: The context only provides a brief introduction to GRU and its differences from LSTM. It does not provide a comprehensive comparison of the two models, and more information would be needed to fully understand their similarities and differences.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 6.5177164255457845
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.402620758365548
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.0330799906217836
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.154949954282771
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 2.5936147990499494
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.3064253157764067
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 2.364331792921061
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 1,
+                "score": 1.9398324703654506
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 1.661278228834381
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 1.9713123855552674
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "category": "multihop",
+        "question": "Why is text detection needed before the CNN-LSTM-CTC pipeline?",
+        "answer": "The context does not explicitly state why text detection is needed before the CNN-LSTM-CTC pipeline. However, it can be inferred that text detection is a separate step in the OCR process, as mentioned in [4] (Source: image_analysis_notes.pdf, page 5), which states that PaddleOCR offers a modular pipeline consisting of separate pre-trained models for text detection and text recognition.\n\nAdditionally, [6] (Source: image_analysis_notes.pdf, page 4) mentions that the CNN-LSTM-CTC architecture is designed for recognizing single-line text, and when dealing with multi-line documents, characters from different lines may be a problem. This suggests that text detection might be necessary to identify the text regions in an image before applying the CNN-LSTM-CTC pipeline.\n\nWhile the context provides some information about the OCR process and the CNN-LSTM-CTC pipeline, it does not directly answer the question of why text detection is needed. Therefore, the answer is limited by the available information.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 8.06080571488628
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 7.607368552494179
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 6.144022992720641
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 7.382137123499725
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 7.3089466708635955
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 6.256370444468812
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 5.6639362411361205
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 5.373144789160117
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 4.828269782018978
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 4.57922130702921
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "category": "multihop",
+        "question": "How does the forget gate and input gate together update the cell state?",
+        "answer": "According to the context, the forget gate and input gate together update the cell state in the following way: \n\nFirst, the forget gate layer decides what information to throw away from the cell state (Source: [4], page 4). Then, the input gate layer decides which values to update (Source: [3], page 5). \n\nThe cell state is updated by multiplying the old state by the forget gate's output, effectively forgetting the things decided to forget earlier. Then, the new candidate values (created by a tanh layer) are added to the cell state, scaled by how much the input gate decided to update each state value (Source: [5], page 5).\n\nHowever, it's also mentioned that another variation is to use coupled forget and input gates, where the decisions to forget and input new information are made together (Source: [2], page 6). In this case, information is only forgotten when new information is input in its place, and new values are only input when something older is forgotten.\n\nIt's worth noting that the Gated Recurrent Unit (GRU) combines the forget and input gates into a single \"update gate\" (Source: [1], page 7), but this is a variation of the standard LSTM model. \n\nLimitations: The context does not provide a detailed mathematical formulation of the update process, but it describes the general mechanism by which the forget gate and input gate update the cell state.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 16.86780618066922
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 15.682639773690314
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 16.45772014391791
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 13.616340848698789
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 12.274464759356476
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 10.962937451125667
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 10.56295864153296
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 4.789458739657157
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 6.145580000095034
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 6.554998077512981
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "category": "cross_document",
+        "question": "Which document discusses vanishing gradients?",
+        "answer": "The document that discusses vanishing gradients is \"image_analysis_notes.pdf\", specifically page 2 (Source: [7]). It mentions that classical RNNs struggle to learn long-term dependencies due to training issues such as vanishing and exploding gradients. \n\nAdditionally, there is a reference to another document \"lstm.pdf\" (Source: [9]), which cites a paper from 1994, but it does not provide any information about vanishing gradients within the given context. \n\nTherefore, based on the available information, \"image_analysis_notes.pdf\" (page 2) is the document that discusses vanishing gradients.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.818180097347895
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 7.582674709354656
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 0.512892323732376
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 0.49584304094314574
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 0.0
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "category": "cross_document",
+        "question": "What problem do both documents identify with classical approaches to their respective tasks?",
+        "answer": "Both documents identify the problem of handling \"long-term dependencies\" with classical approaches to their respective tasks. \n\nIn the context of text recognition, classical RNNs struggle to learn long-term dependencies due to training issues such as vanishing and exploding gradients ([1], image_analysis_notes.pdf, page 2). \n\nSimilarly, in the context of sequence-based models, classical RNNs are also noted to have difficulty handling long-term dependencies, as explored by Hochreiter (1991) and Bengio, et al ([3], lstm.pdf, page 2).\n\nAdditionally, PyTesseract, a classical OCR pipeline, has limitations that become evident in real-world scenarios, including strong dependence on hand-crafted rules and heuristics, and sensitivity to noise, skew, and font variations ([2], image_analysis_notes.pdf, page 2).\n\nIt can be inferred that both documents are referring to the limitations of classical approaches in handling complex and variable-length sequences, whether it be text recognition or sequence-based models. However, the exact nature of these limitations may vary depending on the specific task and context.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 9.240137268545384
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 7.03548440287713
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 3.6610214159786105
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 3.489537274178583
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 2.9810096588761645
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.8682774105192763
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 3.3901894475075927
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 7.39872466681768
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 0.4862568638541481
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 5.453489575442899
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "category": "refusal",
+        "question": "What is the BLEU score of the LSTM model described?",
+        "answer": "I couldn't find relevant information in the uploaded documents to answer this question. The context does not mention the BLEU score of the LSTM model. The provided information focuses on the architecture and functionality of LSTMs, their variants, and their application in image analysis and OCR systems, but it does not include any evaluation metrics such as the BLEU score (Source: lstm.pdf, image_analysis_notes.pdf).",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 5.265171327923698
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 2.3151719740552887
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.457447521140987
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.4129147560154873
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.4914757417752824
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 1.2401200434357493
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 1.4230730999810017
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 1.227976119758431
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 0.581919492483139
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 2.1212916460617537
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "category": "refusal",
+        "question": "What dataset was used to train the OCR model?",
+        "answer": "I couldn't find relevant information in the uploaded documents to answer this question. The context mentions that modern OCR systems rely on transfer learning and use pre-trained models on large and diverse datasets (Source: image_analysis_notes.pdf, pages 5 and 10), but it does not specify the particular dataset used to train the OCR model.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 7.440179081654763
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 4.226489745740443
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 8.052280601033772
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.6808521671223255
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 3.861122522822584
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.537329092684044
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.0588013303485635
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 3.7253092018520073
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.4348928865440875
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.7513261574648333
+            }
+        ]
+    },
+    {
+        "id": 34,
+        "category": "refusal",
+        "question": "What is the architecture of GPT-4?",
+        "answer": "I couldn't find relevant information in the uploaded documents to answer this question. The context provided discusses neural network-based architectures, specifically focusing on Recurrent Neural Networks (RNN), Connectionist Temporal Classification (CTC), and Transfer Learning, but it does not mention GPT-4. \n\nSources: [1] to [10] do not contain any information about GPT-4.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 1,
+                "score": 2.5358205471860176
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 2.9429934594258906
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 2.407417648361606
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 1,
+                "score": 3.9309200527675676
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 0.6132140219211578
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.9024682343924204
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 2.5951414340077568
+            }
+        ]
+    },
+    {
+        "id": 35,
+        "category": "adversarial",
+        "question": "The documents say LSTMs were invented in 2020. What year was that?",
+        "answer": "I couldn't find relevant information in the uploaded documents to answer this question. The context actually contradicts the statement, as it mentions that LSTMs were introduced by Hochreiter & Schmidhuber in 1997 (Source: lstm.pdf, page 3). There is no mention of LSTMs being invented in 2020.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 6.384925443963953
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 4.013847971833146
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 2.719255036741298
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 1.5366757332930676
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 1.8871064146213556
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 1.8348042526848776
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 2.2038066100398614
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 2.0215669436744146
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 1.3488213142891095
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 1.3580444941231211
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "category": "adversarial",
+        "question": "Explain how PyTesseract outperforms neural OCR systems based on these documents.",
+        "answer": "I couldn't find relevant information in the uploaded documents to answer this question. The context provided does not mention PyTesseract outperforming neural OCR systems. In fact, it highlights the limitations of PyTesseract, such as its strong dependence on hand-crafted rules and heuristics, and sensitivity to noise, skew, and font variations (Source: image_analysis_notes.pdf, page 2). The documents discuss how modern OCR systems, which adopt a fully neural network-based approach, can overcome these limitations and provide more robust, flexible, and scalable solutions (Source: image_analysis_notes.pdf, page 2-3).",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 12.012036999111857
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 9.326450869516583
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 7.690906755151186
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 6.669691281755227
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 5.746134480784473
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 4.737738923653144
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 4.672187426042253
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 3.474954895356474
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 2.631422526090547
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.331265034336708
+            }
+        ]
+    },
+    {
+        "id": 37,
+        "category": "adversarial",
+        "question": "What does the document say about attention mechanisms in detail?",
+        "answer": "According to the context, attention mechanisms are discussed in several sources, primarily in \"lstm.pdf\". \n\nAs stated in [4] (Source: lstm.pdf, page 7), \"A common opinion among researchers is: 'Yes! There is a next step and it\u2019s attention!' The idea is to let every step of an RNN pick information to look at from some larger collection of information.\" This suggests that attention mechanisms allow RNNs to selectively focus on certain parts of the input data.\n\nAdditionally, [1] (Source: lstm.pdf, page 7) mentions that Xu, et al. (2015) have explored attention mechanisms, which could be a starting point for further exploration. \n\nHowever, the context does not provide a detailed explanation of how attention mechanisms work or their implementation. It only mentions that attention is considered a significant advancement in RNN research, and some studies, such as Xu, et al. (2015) and Kalchbrenner, et al. (2015), have shown promising results.\n\nLimitations of the answer include the lack of detailed information on the implementation and technical aspects of attention mechanisms, as well as the absence of a comprehensive overview of the current state of research in this area.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 4.306352498689331
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 4.052066393526218
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 3.072116790088495
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 2.3214822657214236
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 2.621043525832276
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 3.818180097347895
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 3,
+                "score": 2.921328859627797
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 0.4778322637081146
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 8,
+                "score": 2.784650561281042
+            }
+        ]
+    },
+    {
+        "id": 38,
+        "category": "topic_switch",
+        "question": "What is the forget gate?",
+        "answer": "The forget gate is a sigmoid layer in a Long Short Term Memory (LSTM) model that decides what information to discard from the cell state. According to [3] (Source: lstm.pdf, page 4), it \"looks at $h_{t-1}$ and $x_t$ and outputs a number between 0 and 1 for each number in the cell state $C_{t-1}$.\" A value of 0 represents \"completely get rid of this\" while a value of 1 represents \"completely keep this.\" The forget gate is one of the three gates in an LSTM, as mentioned in [8] (Source: lstm.pdf, page 4), which are used to protect and control the cell state. \n\nIt's also worth noting that the forget gate can be combined with the input gate in some LSTM variants, such as the Gated Recurrent Unit (GRU), as mentioned in [2] (Source: lstm.pdf, page 7). However, in the standard LSTM model, the forget gate is a separate component.",
+        "sources": [
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 4.854911979355559
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 7,
+                "score": 5.056701230298678
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 4.753788960422113
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 2.784650561281042
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 2.493048944513179
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 2.3611787010161684
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 4,
+                "score": 0.6175792932510376
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 2.660189995773957
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 6,
+                "score": 0.5204920411109925
+            }
+        ]
+    },
+    {
+        "id": 39,
+        "category": "topic_switch",
+        "question": "Blank symbol?",
+        "answer": "The blank symbol is a special symbol used in the Connectionist Temporal Classification (CTC) mechanism. It is mentioned in [1] (Source: image_analysis_notes.pdf, page 4) as a symbol that may be output by the LSTM, denoted as \"\". The blank symbol is used to represent the absence of a character in the output sequence. During decoding, CTC removes these blank symbols and collapses consecutive repeated characters to produce the final output text sequence, as stated in [3] (Source: image_analysis_notes.pdf, page 4) and [8] (Source: image_analysis_notes.pdf, page 4). \n\nThe blank symbol is also mentioned in [2] (Source: image_analysis_notes.pdf, page 3) and [6] (Source: image_analysis_notes.pdf, page 3) as part of the character set over which the CTC loss is computed, along with other characters such as A-Z and digits. \n\nLimitation: The context does not provide information on how the blank symbol is specifically represented or implemented in the code, but its purpose and role in the CTC mechanism are clearly described.",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 4.7704573558448296
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 4.803302120966377
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.1461666431229007
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 5.120601818495478
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 0.4151422202587127
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 3,
+                "score": 4.706097191523677
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 5,
+                "score": 0.4063194632530212
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 4,
+                "score": 2.206946250464812
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 2,
+                "score": 2.176132134266368
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 0.0
+            }
+        ]
+    },
+    {
+        "id": 40,
+        "category": "multihop",
+        "question": "What transfer learning strategy should be used if you have a small dataset and your task is similar to the pre-training task?",
+        "answer": "According to the context, if you have a small dataset and your task is similar to the pre-training task, the recommended transfer learning strategy is to \"Freeze backbone, train only recognition head\" (Source: image_analysis_notes.pdf, page 7). This approach is useful when the available dataset is small, as it minimizes overfitting while still allowing adaptation to a new character set or language (Source: image_analysis_notes.pdf, page 6). \n\nThis strategy is outlined in the decision matrix for choosing a transfer learning strategy, which considers the amount of available data and the similarity of the new task to the original pre-training task (Source: image_analysis_notes.pdf, page 7).",
+        "sources": [
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 29.929795577210847
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 20.228331941038224
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 19.488273863705356
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 14.586361138410853
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 7,
+                "score": 16.75450376039312
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 11.133112697113397
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 5,
+                "score": 9.77604809168684
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 7.80771771752104
+            },
+            {
+                "source": "image_analysis_notes.pdf",
+                "page": 6,
+                "score": 8.480662623128351
+            },
+            {
+                "source": "lstm.pdf",
+                "page": 2,
+                "score": 9.694266475529876
+            }
+        ]
+    }
+]
