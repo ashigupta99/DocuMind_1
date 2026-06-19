@@ -105,13 +105,13 @@ _splitter = RecursiveCharacterTextSplitter(
 
 
 def chunk_documents(documents):
-    """Splits each document's content using LangChain's
-    RecursiveCharacterTextSplitter, which respects sentence/paragraph
-    boundaries rather than cutting at raw character counts."""
     all_chunks = []
     for doc in documents:
         pieces = _splitter.split_text(doc["content"])
         for idx, piece in enumerate(pieces):
+            # Skip chunks under 100 characters — likely TOC or headers
+            if len(piece.strip()) < 100:
+                continue
             all_chunks.append({
                 "content": piece,
                 "source": doc["source"],
@@ -379,46 +379,73 @@ Return ONLY the rewritten (or unchanged) question.
     return response.choices[0].message.content.strip()
 
 
-def generate_answer(query, index, chunks, history=None, top_k=15, score_threshold=SCORE_THRESHOLD):
-    SUMMARY_PHRASES = ["summary", "summarize", "summarise", "overview",
-                       "main topics", "what are these files about", "give the summary"]
-    is_summary = any(phrase in query.lower() for phrase in SUMMARY_PHRASES)
+def generate_answer(query, index, chunks, history=None, top_k=10,
+                     score_threshold=SCORE_THRESHOLD):
+    """Full RAG generation step: retrieve, check confidence, build
+    prompt with history, call Groq, return answer + sources.
+
+    Uses adaptive two-stage retrieval:
+    Stage 1 — retrieve with query alone.
+    Stage 2 — if confidence is low and history exists, retry with
+    expanded query (previous question + answer + current query).
+    The expanded query is also passed to the LLM so it has context
+    for ambiguous follow-ups like 'Why?' or 'Explain that.'
+    Summary queries and short queries bypass the score threshold.
+    """
+
+    SUMMARY_WORDS = {
+        "summary", "summarize", "summarise",
+        "overview", "brief", "outline",
+        "list", "topics", "covered",
+        "everything", "all",
+        "code", "formula", "equation", "implement"
+    }
+
     expanded_query = None
+    query_words = set(query.lower().split())
+    is_summary = bool(query_words.intersection(SUMMARY_WORDS))
 
-    if is_summary:
-        # Grabs a few chunks per document rather than scoring by
-        # similarity — a true "summarize everything" request isn't a
-        # similarity-search problem. Known limit: only the first 3
-        # chunks per doc are used, so very long documents' later
-        # sections may be underrepresented in the summary.
-        doc_chunks = {}
-        for c in chunks:
-            doc_chunks.setdefault(c["source"], []).append(c)
-        retrieved = [c for chunks_list in doc_chunks.values() for c in chunks_list[:3]]
-    else:
-        retrieved = retrieve(query, index, chunks, top_k=top_k)
+    # Short queries score low even when answer exists — bypass threshold
+    is_short_query = len(query.split()) <= 4
 
-        if history and (not retrieved or retrieved[0]["score"] < score_threshold):
-            rewritten = rewrite_query_with_history(query, history)
-            if rewritten != query:
-                expanded_query = rewritten
-            search_query = expanded_query if expanded_query else query
-            retrieved = retrieve(search_query, index, chunks, top_k=top_k)
+    # Use more chunks for summary-type queries
+    effective_top_k = 20 if is_summary else top_k
 
+    # Stage 1: retrieve with query alone
+    retrieved = retrieve(query, index, chunks, top_k=effective_top_k)
+
+    # Stage 2: low confidence + history → retry with expanded query
+    if history and (not retrieved or retrieved[0]["score"] < 0.40):
+        expanded_query = (
+            history[-1]["question"]
+            + " "
+            + history[-1]["answer"][:200]
+            + " "
+            + query
+        )
+        retrieved = retrieve(expanded_query, index, chunks, top_k=effective_top_k)
+
+    # Summary and short queries bypass score threshold
+    if not (is_summary or is_short_query):
         if not retrieved or retrieved[0]["score"] < score_threshold:
             return {
-                "answer": "I couldn't find relevant information in your uploaded documents to answer this question.",
+                "answer": "I couldn't find relevant information in your "
+                           "uploaded documents to answer this question.",
                 "sources": []
             }
 
+    # Use expanded query for LLM prompt if stage 2 was triggered,
+    # so the LLM sees a meaningful question instead of just "Why?"
     prompt_query = expanded_query if expanded_query else query
-    user_prompt = build_prompt(prompt_query, retrieved, is_followup=bool(history))
+    user_prompt = build_prompt(prompt_query, retrieved)
 
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+
     if history:
         for exchange in history[-4:]:
             messages.append({"role": "user", "content": exchange["question"]})
             messages.append({"role": "assistant", "content": exchange["answer"]})
+
     messages.append({"role": "user", "content": user_prompt})
 
     client = get_groq_client()
@@ -429,18 +456,23 @@ def generate_answer(query, index, chunks, history=None, top_k=15, score_threshol
             temperature=0.2,
             max_tokens=1000 if is_summary else 600
         )
+
     except RateLimitError:
-        return {"answer": "Groq rate limit reached. Please try again later.", "sources": []}
+        return {
+            "answer": "Groq rate limit reached. Please try again later.",
+            "sources": []
+        }
+
     except Exception as e:
-        return {"answer": f"Error contacting the LLM: {e}", "sources": []}
+        return {
+            "answer": f"Error contacting the LLM: {e}",
+            "sources": []
+        }
 
     answer = response.choices[0].message.content
-
-    seen, sources = set(), []
-    for r in retrieved:
-        key = (r["source"], r["page"])
-        if key not in seen:
-            seen.add(key)
-            sources.append({"source": r["source"], "page": r["page"], "score": r.get("score")})
+    sources = [
+        {"source": r["source"], "page": r["page"], "score": r["score"]}
+        for r in retrieved
+    ]
 
     return {"answer": answer, "sources": sources}
