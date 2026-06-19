@@ -1,0 +1,417 @@
+{
+  "manual_avg": 8.3,
+  "llm_avg": 8.88,
+  "mean_absolute_error": 0.93,
+  "exact_match": 12,
+  "within_one": 33,
+  "diverged_count": 7,
+  "by_category": {
+    "fact": {
+      "manual_avg": 8.1,
+      "llm_avg": 8.8,
+      "mae": 0.6
+    },
+    "why": {
+      "manual_avg": 8.4,
+      "llm_avg": 8.6,
+      "mae": 1.0
+    },
+    "compare": {
+      "manual_avg": 8.3,
+      "llm_avg": 8.3,
+      "mae": 0.7
+    },
+    "multihop": {
+      "manual_avg": 7.8,
+      "llm_avg": 8.2,
+      "mae": 1.2
+    },
+    "cross_document": {
+      "manual_avg": 8.2,
+      "llm_avg": 9.2,
+      "mae": 1.4
+    },
+    "refusal": {
+      "manual_avg": 10.0,
+      "llm_avg": 10.0,
+      "mae": 0.0
+    },
+    "summary": {
+      "manual_avg": 7.5,
+      "llm_avg": 8.5,
+      "mae": 1.0
+    },
+    "adversarial": {
+      "manual_avg": 7.7,
+      "llm_avg": 10.0,
+      "mae": 2.3
+    },
+    "topic_switch": {
+      "manual_avg": 8.5,
+      "llm_avg": 9.0,
+      "mae": 0.5
+    }
+  },
+  "per_question": [
+    {
+      "id": 1,
+      "category": "fact",
+      "question": "What is the forget gate in LSTM?",
+      "manual_score": 9,
+      "llm_score": 10,
+      "diff": 1,
+      "reasoning": "The answer accurately describes the function and purpose of the forget gate in LSTM, providing specific details about its operation and citing a relevant source for further information, demonstrating a thorough understanding of the concept."
+    },
+    {
+      "id": 2,
+      "category": "fact",
+      "question": "What does the CNN do in the CNN-LSTM-CTC OCR pipeline?",
+      "manual_score": 9,
+      "llm_score": 9,
+      "diff": 0,
+      "reasoning": "The answer accurately describes the role of the CNN in the CNN-LSTM-CTC OCR pipeline, providing specific details about feature extraction and the conversion of the image into a compact feature map, and is well-cited with a reference to a source, but loses a point for stating that no further information is available, which is not necessary for the answer."
+    },
+    {
+      "id": 3,
+      "category": "fact",
+      "question": "What is a blank symbol in CTC and why is it needed?",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer accurately explains the role of the blank symbol in CTC, providing relevant sources to support the explanation, but loses a point for not delving deeper into the theoretical necessity of the blank symbol from a more fundamental perspective."
+    },
+    {
+      "id": 4,
+      "category": "why",
+      "question": "Why do vanilla RNNs fail at long-term dependencies?",
+      "manual_score": 9,
+      "llm_score": 8,
+      "diff": -1,
+      "reasoning": "The answer correctly identifies vanishing and exploding gradients as the primary reasons for vanilla RNNs' failure at long-term dependencies and provides relevant citations, but lacks a detailed explanation of why these issues occur, making it slightly incomplete."
+    },
+    {
+      "id": 5,
+      "category": "why",
+      "question": "Why are lower learning rates used for pre-trained layers during fine-tuning?",
+      "manual_score": 9,
+      "llm_score": 10,
+      "diff": 1,
+      "reasoning": "The answer is fully correct, well-cited, and provides a clear explanation for why lower learning rates are used for pre-trained layers during fine-tuning, specifically to avoid catastrophic forgetting and allow for slow adaptation to the target domain."
+    },
+    {
+      "id": 6,
+      "category": "compare",
+      "question": "Difference between RNN and LSTM.",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer accurately compares RNNs and LSTMs, highlighting their differences in handling long-term dependencies, and provides relevant citations to support the claims, but the conclusion could be more concise and directly stated without the caveat about the context."
+    },
+    {
+      "id": 7,
+      "category": "compare",
+      "question": "Compare freezing layers and partial fine-tuning as transfer learning strategies.",
+      "manual_score": 9,
+      "llm_score": 9,
+      "diff": 0,
+      "reasoning": "The answer provides a clear and well-structured comparison between freezing layers and partial fine-tuning as transfer learning strategies, with proper citations and explanations of the key differences and use cases, but loses a point for lacking specific performance metrics or results."
+    },
+    {
+      "id": 8,
+      "category": "multihop",
+      "question": "How does the cell state help long-term dependencies?",
+      "manual_score": 8,
+      "llm_score": 8,
+      "diff": 0,
+      "reasoning": "The answer is correct and well-cited, explaining how the cell state in LSTMs helps with long-term dependencies, but loses points for a minor omission regarding the exact mechanism, which is not fully detailed in the provided context."
+    },
+    {
+      "id": 9,
+      "category": "cross_document",
+      "question": "Summarize both documents.",
+      "manual_score": 7,
+      "llm_score": 9,
+      "diff": 2,
+      "reasoning": "The answer provides a clear and accurate summary of both documents, covering the main topics and referencing specific pages, but loses a point for mentioning the limitation of the context without explicitly stating that it is a limitation of the summary itself, which could be seen as slightly verbose."
+    },
+    {
+      "id": 10,
+      "category": "refusal",
+      "question": "Who invented transformers?",
+      "manual_score": 10,
+      "llm_score": 10,
+      "diff": 0,
+      "reasoning": "The system correctly refused to answer the question, citing a lack of relevant information in the uploaded documents and providing context about what information is available, which demonstrates a proper refusal with appropriate justification."
+    },
+    {
+      "id": 11,
+      "category": "cross_document",
+      "question": "How does LSTM relate to image analysis?",
+      "manual_score": 9,
+      "llm_score": 8,
+      "diff": -1,
+      "reasoning": "The answer correctly establishes a relationship between LSTM and image analysis by explaining how LSTMs process CNN features and output character probabilities, and it provides relevant citations to support its claims, but it lacks a comprehensive explanation of the internal workings of LSTMs and relies on external resources for further information."
+    },
+    {
+      "id": 12,
+      "category": "summary",
+      "question": "Summarize the LSTM document.",
+      "manual_score": 7,
+      "llm_score": 8,
+      "diff": 1,
+      "reasoning": "The answer provides a good summary of the LSTM document, covering key points such as the structure of LSTM networks, the role of the forget gate layer, and the application of LSTMs in image analysis, while staying document-grounded with proper citations, but loses points for being slightly verbose and noting the limitations of the provided context."
+    },
+    {
+      "id": 13,
+      "category": "summary",
+      "question": "List major topics in image analysis notes.",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer provides a comprehensive and well-structured summary of the major topics in image analysis notes, with proper citations and coverage of key concepts, but loses a point for being slightly verbose and mentioning potential limitations that are not directly relevant to the question."
+    },
+    {
+      "id": 14,
+      "category": "compare",
+      "question": "Compare training only the recognition head versus fine-tuning the entire network.",
+      "manual_score": 9,
+      "llm_score": 9,
+      "diff": 0,
+      "reasoning": "The answer provides a clear and well-cited comparison of training only the recognition head versus fine-tuning the entire network, highlighting the key differences and use cases for each approach, but loses a point for not providing a direct comparison of performance."
+    },
+    {
+      "id": 15,
+      "category": "multihop",
+      "question": "How do LSTMs solve the problem faced by RNNs?",
+      "manual_score": 8,
+      "llm_score": 6,
+      "diff": -2,
+      "reasoning": "The answer is mostly correct in identifying the problem with RNNs and the capability of LSTMs to learn long-term dependencies, but it lacks a detailed explanation of how LSTMs solve the problem, relying on external references without providing a clear summary of the solution."
+    },
+    {
+      "id": 16,
+      "category": "fact",
+      "question": "What is a cell state?",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer is correct and well-cited, providing a clear understanding of the cell state in the context of LSTMs, but loses a point for not providing a detailed, technical definition and including some minor, informal analogies."
+    },
+    {
+      "id": 17,
+      "category": "fact",
+      "question": "What are the gates in LSTM?",
+      "manual_score": 6,
+      "llm_score": 8,
+      "diff": 2,
+      "reasoning": "The answer is correct and well-cited, providing a clear explanation of the gates in LSTM, but loses points for not providing a complete description of all three gates, relying on external context for the missing information."
+    },
+    {
+      "id": 18,
+      "category": "why",
+      "question": "Why is the cell state designed like a conveyor belt?",
+      "manual_score": 7,
+      "llm_score": 8,
+      "diff": 1,
+      "reasoning": "The answer is correct and grounded, citing a relevant source to explain the conveyor belt design of the cell state, but it loses points for not providing a more direct answer to the 'why' question, instead stating that the underlying reason is not explicitly stated."
+    },
+    {
+      "id": 19,
+      "category": "compare",
+      "question": "Compare the repeating module structure of a standard RNN and an LSTM.",
+      "manual_score": 9,
+      "llm_score": 8,
+      "diff": -1,
+      "reasoning": "The answer correctly compares the repeating module structure of a standard RNN and an LSTM, citing specific sources, but the explanation is slightly verbose and lacks detail about the functional differences between the single layer in RNNs and the four interacting layers in LSTMs."
+    },
+    {
+      "id": 20,
+      "category": "cross_document",
+      "question": "Which document talks about noise?",
+      "manual_score": 9,
+      "llm_score": 10,
+      "diff": 1,
+      "reasoning": "The answer correctly identifies the relevant documents and provides specific quotes from those documents that discuss noise, demonstrating accurate retrieval and coverage of the right scope."
+    },
+    {
+      "id": 21,
+      "category": "fact",
+      "question": "What is the role of CTC in an OCR pipeline?",
+      "manual_score": 9,
+      "llm_score": 9,
+      "diff": 0,
+      "reasoning": "The answer accurately describes the role of CTC in an OCR pipeline, providing specific details about its functionality and citing relevant sources, but is slightly verbose and could be more concise."
+    },
+    {
+      "id": 22,
+      "category": "fact",
+      "question": "What is the input gate in LSTM?",
+      "manual_score": 8,
+      "llm_score": 8,
+      "diff": 0,
+      "reasoning": "The answer accurately describes the input gate in LSTM, citing specific sources and explaining its role in deciding which values to update in the cell state, but loses points for referring to external resources for more information instead of providing a complete explanation."
+    },
+    {
+      "id": 23,
+      "category": "fact",
+      "question": "What is the output gate in LSTM?",
+      "manual_score": 8,
+      "llm_score": 8,
+      "diff": 0,
+      "reasoning": "The answer accurately describes the output gate in LSTM, citing a specific source and explaining the process in detail, but loses points for not providing the exact mathematical formulation, which would have made the answer complete."
+    },
+    {
+      "id": 24,
+      "category": "why",
+      "question": "Why is a linear layer needed between the LSTM and CTC?",
+      "manual_score": 9,
+      "llm_score": 8,
+      "diff": -1,
+      "reasoning": "The answer is correct and well-cited, providing a clear explanation of the role of the linear layer in mapping LSTM outputs to a probability distribution over characters, but it lacks a deeper explanation of why LSTM outputs cannot be used directly by CTC, making it slightly incomplete."
+    },
+    {
+      "id": 25,
+      "category": "why",
+      "question": "Why does transfer learning help OCR systems?",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer is well-cited and provides a clear explanation of how transfer learning benefits OCR systems, including faster convergence, reduced data requirements, and improved performance, but lacks a detailed explanation of the underlying reasons for its effectiveness in general."
+    },
+    {
+      "id": 26,
+      "category": "compare",
+      "question": "Compare EasyOCR and PaddleOCR.",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer provides a well-structured comparison between EasyOCR and PaddleOCR, highlighting their design philosophies, strengths, and limitations, with proper citations to support the claims, but loses a point for not providing a direct performance comparison between the two frameworks."
+    },
+    {
+      "id": 27,
+      "category": "compare",
+      "question": "Compare LSTM and GRU.",
+      "manual_score": 7,
+      "llm_score": 6,
+      "diff": -1,
+      "reasoning": "The answer provides a basic comparison between LSTM and GRU, highlighting their differences in gate structure, but lacks a comprehensive analysis of their performance, advantages, and limitations, making it mostly correct but incomplete."
+    },
+    {
+      "id": 28,
+      "category": "multihop",
+      "question": "Why is text detection needed before the CNN-LSTM-CTC pipeline?",
+      "manual_score": 6,
+      "llm_score": 8,
+      "diff": 2,
+      "reasoning": "The answer is correct and grounded, providing relevant information from sources to infer the importance of text detection before the CNN-LSTM-CTC pipeline, but it is slightly verbose and does not directly answer the question due to the limitations of the available information."
+    },
+    {
+      "id": 29,
+      "category": "multihop",
+      "question": "How does the forget gate and input gate together update the cell state?",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer accurately describes how the forget gate and input gate update the cell state in an LSTM model, providing relevant sources to support the explanation, but loses a point for not providing a detailed mathematical formulation of the update process."
+    },
+    {
+      "id": 30,
+      "category": "cross_document",
+      "question": "Which document discusses vanishing gradients?",
+      "manual_score": 8,
+      "llm_score": 10,
+      "diff": 2,
+      "reasoning": "The answer correctly identifies the document that discusses vanishing gradients and provides a specific page number, while also mentioning another relevant document and accurately assessing its relevance to the topic, demonstrating effective cross-document retrieval and analysis."
+    },
+    {
+      "id": 31,
+      "category": "cross_document",
+      "question": "What problem do both documents identify with classical approaches to their respective tasks?",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer correctly identifies the problem of handling long-term dependencies with classical approaches as a common issue in both documents, and provides relevant citations and context from both texts, but includes some slightly redundant information and vague phrasing, such as the inference about complex and variable-length sequences."
+    },
+    {
+      "id": 32,
+      "category": "refusal",
+      "question": "What is the BLEU score of the LSTM model described?",
+      "manual_score": 10,
+      "llm_score": 10,
+      "diff": 0,
+      "reasoning": "The system correctly refused to answer the question due to a lack of relevant information in the provided documents, and it properly cited the sources that were checked."
+    },
+    {
+      "id": 33,
+      "category": "refusal",
+      "question": "What dataset was used to train the OCR model?",
+      "manual_score": 10,
+      "llm_score": 10,
+      "diff": 0,
+      "reasoning": "The system correctly refused to answer the question by stating it couldn't find relevant information in the uploaded documents, and instead provided related but non-specific information from the context, demonstrating a proper refusal with supporting evidence."
+    },
+    {
+      "id": 34,
+      "category": "refusal",
+      "question": "What is the architecture of GPT-4?",
+      "manual_score": 10,
+      "llm_score": 10,
+      "diff": 0,
+      "reasoning": "The system correctly refused to answer the question about GPT-4's architecture, citing the lack of relevant information in the uploaded documents and providing a clear explanation for its refusal."
+    },
+    {
+      "id": 35,
+      "category": "adversarial",
+      "question": "The documents say LSTMs were invented in 2020. What year was that?",
+      "manual_score": 9,
+      "llm_score": 10,
+      "diff": 1,
+      "reasoning": "The system correctly rejected the false premise that LSTMs were invented in 2020 and provided accurate information from a credible source, demonstrating a strong ability to handle adversarial questions."
+    },
+    {
+      "id": 36,
+      "category": "adversarial",
+      "question": "Explain how PyTesseract outperforms neural OCR systems based on these documents.",
+      "manual_score": 8,
+      "llm_score": 10,
+      "diff": 2,
+      "reasoning": "The answer correctly rejects the false premise that PyTesseract outperforms neural OCR systems, instead providing evidence from the documents that highlights the limitations of PyTesseract and the advantages of neural network-based OCR systems."
+    },
+    {
+      "id": 37,
+      "category": "adversarial",
+      "question": "What does the document say about attention mechanisms in detail?",
+      "manual_score": 6,
+      "llm_score": 10,
+      "diff": 4,
+      "reasoning": "The answer correctly provides information about attention mechanisms from the document, while also acknowledging the limitations of the provided information and refusing to hallucinate or provide unsubstantiated details, thus demonstrating a strong ability to reject the implicit premise of providing a detailed explanation where the document does not support it."
+    },
+    {
+      "id": 38,
+      "category": "topic_switch",
+      "question": "What is the forget gate?",
+      "manual_score": 9,
+      "llm_score": 9,
+      "diff": 0,
+      "reasoning": "The answer accurately explains the concept of the forget gate in an LSTM model, providing relevant details and citations, but loses a point for slightly verbose information about the GRU variant, which, although relevant, is not directly asked about."
+    },
+    {
+      "id": 39,
+      "category": "topic_switch",
+      "question": "Blank symbol?",
+      "manual_score": 8,
+      "llm_score": 9,
+      "diff": 1,
+      "reasoning": "The answer accurately describes the blank symbol's purpose and role in the Connectionist Temporal Classification (CTC) mechanism, with proper citations, but loses a point for not fully addressing the 'blank symbol' question in a more general sense, as the response is heavily focused on its use in CTC."
+    },
+    {
+      "id": 40,
+      "category": "multihop",
+      "question": "What transfer learning strategy should be used if you have a small dataset and your task is similar to the pre-training task?",
+      "manual_score": 9,
+      "llm_score": 10,
+      "diff": 1,
+      "reasoning": "The answer is fully correct, well-cited, and provides a clear explanation of the recommended transfer learning strategy for a small dataset and a task similar to the pre-training task, with relevant references to supporting sources."
+    }
+  ]
+}
