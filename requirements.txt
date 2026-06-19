@@ -1,0 +1,12 @@
+streamlit
+pypdf
+python-docx
+pandas
+python-dotenv
+groq
+numpy
+faiss-cpu
+sentence-transformers
+langchain-text-splitters
+torch
+scikit-learn
