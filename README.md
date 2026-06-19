@@ -60,7 +60,14 @@ Dense embeddings capture meaning but can miss exact terms and abbreviations. BM2
 
 Custom 40-question benchmark covering: fact, why, compare, multi-hop, cross-document, summary, topic-switch, refusal, and adversarial categories.
 
-**Overall score: 8.3 / 10**
+| Metric | Score |
+|---|---|
+| Manual score | 8.3 / 10 |
+| LLM judge score (Llama-3.3-70B) | 8.9 / 10 |
+| Agreement within 1 point | 33 / 40 questions |
+| Mean absolute error | 0.93 points |
+
+Refusal and adversarial categories scored 10/10 on both passes.
 
 ---
 
